@@ -1,6 +1,6 @@
 {
   "name": "discord",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "my first attepmt at a discord bot",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,10 @@
   "author": "Baggette",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^13.5.0",
+    "discord.js": "^13.5.1",
     "dotenv": "^10.0.0",
+    "got": "^11.8.3",
+    "https": "^1.0.0",
     "pretty-ms": "^7.0.1"
   }
 }
