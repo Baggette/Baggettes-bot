@@ -31,7 +31,7 @@ client.on('messageCreate', (message) => { // You can use one block for an entire
         message.channel.send(`🏓Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
         });
     } else if (message.content === Prefix + 'help') {
-        message.reply({content: '> `gping` to get bot latency \n> `ghelp` to see this menu \n > `gg` to get the link to the best website \n > `gmake my mac faster` to mac your mac faster \n > `gprefix` to see the prefix \n > `gutptime` to view the bots uptime \n > `gmeme` to see a shitpost \n > `glegacy` to see a post from the r/legacy jailbreak subreddit \n > `gtiwtter` to see some tweets'});
+        message.reply({content: '> `gping` to get bot latency \n> `ghelp` to see this menu \n > `gg` to get the link to the best website \n > `gmake my mac faster` to mac your mac faster \n > `gprefix` to see the prefix \n > `gutptime` to view the bots uptime \n > `gmeme` to see a shitpost \n > `glegacy` to see a post from the r/legacy jailbreak subreddit \n > `gtwitter` to see some tweets'});
     } else if (message.content === Prefix +'uptime') {message.channel.send(`Uptime: ${prettyMilliseconds(client.uptime)}`)
     } else if (message.content === Prefix +'meme') {
             const { MessageEmbed } = require('discord.js');
