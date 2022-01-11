@@ -31,7 +31,7 @@ client.on('messageCreate', (message) => { // You can use one block for an entire
         message.channel.send(`🏓Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`);
         });
     } else if (message.content === Prefix + 'help') {
-        message.reply({content: '> `gping` to get bot latency \n> `ghelp` to see this menu \n > `gg` to get the link to the best website \n > `gmake my mac faster` to mac your mac faster \n > `gprefix` to see the prefix \n > `gutptime` to view the bots uptime \n > `gmeme` to see a shitpost \n > `glegacy` to see a post from the r/legacy jailbreak subreddit'});
+        message.reply({content: '> `gping` to get bot latency \n> `ghelp` to see this menu \n > `gg` to get the link to the best website \n > `gmake my mac faster` to mac your mac faster \n > `gprefix` to see the prefix \n > `gutptime` to view the bots uptime \n > `gmeme` to see a shitpost \n > `glegacy` to see a post from the r/legacy jailbreak subreddit \n > `gtiwtter` to see some tweets'});
     } else if (message.content === Prefix +'uptime') {message.channel.send(`Uptime: ${prettyMilliseconds(client.uptime)}`)
     } else if (message.content === Prefix +'meme') {
             const { MessageEmbed } = require('discord.js');
@@ -61,6 +61,30 @@ client.on('messageCreate', (message) => { // You can use one block for an entire
         const { MessageEmbed } = require('discord.js');
         const embed = new MessageEmbed()
     got('https://www.reddit.com/r/LegacyJailbreak/random/.json')
+        .then(response => {
+            const [list] = JSON.parse(response.body);
+            const [post] = list.data.children;
+
+            const permalink = post.data.permalink;
+            const memeUrl = `https://reddit.com${permalink}`;
+            const memeImage = post.data.url;
+            const memeTitle = post.data.title;
+            const memeUpvotes = post.data.ups;
+            const memeNumComments = post.data.num_comments;
+
+            embed.setTitle(`${memeTitle}`);
+            embed.setURL(`${memeUrl}`);
+            embed.setColor('RANDOM');
+            embed.setImage(memeImage);
+            embed.setFooter(`👍 ${memeUpvotes} 💬 ${memeNumComments}`);
+
+            message.channel.send({ embeds: [embed] })
+        })
+        .catch(console.error);
+    } else if (message.content === Prefix +'twitter') {
+        const { MessageEmbed } = require('discord.js');
+        const embed = new MessageEmbed()
+    got('https://www.reddit.com/r/WhitePeopleTwitter/random/.json')
         .then(response => {
             const [list] = JSON.parse(response.body);
             const [post] = list.data.children;
