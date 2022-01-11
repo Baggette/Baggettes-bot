@@ -1,6 +1,6 @@
 {
   "name": "discord",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "my first attepmt at a discord bot",
   "main": "index.js",
   "scripts": {
