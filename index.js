@@ -50,6 +50,8 @@ client.on('messageCreate', (message) => { // You can use one block for an entire
         client.commands.get('dog').execute(message, args);
     } else if (command ==='food'){
         client.commands.get('food').execute(message, args);
+    } else if (command ==='cat'){
+        client.commands.get('cat').execute(message, args);
     }
 });
 client.login(process.env.TOKEN)
