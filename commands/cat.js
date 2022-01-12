@@ -5,7 +5,7 @@ module.exports ={
     execute(message, args){
         const { MessageEmbed } = require('discord.js');
             const embed = new MessageEmbed()
-        got('https://www.reddit.com/r/cats/random/.json')
+        got('https://www.reddit.com/r/cutecats/random/.json')
             .then(response => {
                 const [list] = JSON.parse(response.body);
                 const [post] = list.data.children;
