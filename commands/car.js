@@ -1,6 +1,6 @@
 const got = require('got')
 module.exports ={
-    name: 'cool car',
+    name: 'car',
     description: 'see some cool cars',
     execute(message, args){
         const { MessageEmbed } = require('discord.js');
