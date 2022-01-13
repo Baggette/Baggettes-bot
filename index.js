@@ -5,6 +5,9 @@ const got = require('got');
 const Prefix = "g"
 const Discord = require('discord.js');
 const fs = require('fs');
+const db = require('quick.db')
+const ms = require('parse-ms')
+const prettyMilliseconds = require('pretty-ms')
 const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
@@ -50,10 +53,12 @@ client.on('messageCreate', (message) => { // You can use one block for an entire
         client.commands.get('dog').execute(message, args);
     } else if (command ==='food'){
         client.commands.get('food').execute(message, args);
-    } else if (command ==='cat'){
+    } else if (command ==='cat') {
         client.commands.get('cat').execute(message, args);
-    } else if (command ==='car'){
+    } else if (command === 'car') {
         client.commands.get('car').execute(message, args);
+    } else if (command === 'hack'){
+        client.commands.get('hack').execute(message, args);
     }
 });
 client.login(process.env.TOKEN)
