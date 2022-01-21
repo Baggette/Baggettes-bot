@@ -63,6 +63,8 @@ client.on('messageCreate', (message) => { // You can use one block for an entire
         client.commands.get('linusface').execute(message, args);
     } else if (command === 'linuslore'){
         client.commands.get('linuslore').execute(message, args);
+    } else if (command === 'source'){
+        client.commands.get('source').execute(message, args);
     }
 });
 client.login(process.env.TOKEN)
