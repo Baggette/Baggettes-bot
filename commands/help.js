@@ -4,7 +4,7 @@ module.exports ={
     name: 'help',
     description: 'get a list of bot commands',
     execute(message, args){
-        const help = new MessageEmbed
+        const help = new MessageEmbed()
         .setColor('#f5e942')
         .setTitle('Baggettes Bot')
         .setURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
@@ -29,5 +29,6 @@ module.exports ={
         )
         .setTimestamp()
         .setFooter({ text: 'This bot was lovingly made by Baggette#4777', iconURL: 'https://cdn.discordapp.com/avatars/887756464020672523/5261d8f56ece38a54d1e88d3316310b6.jpg?size=1024'})
+        message.channel.send({ embeds: [help]})
     }   
 }
