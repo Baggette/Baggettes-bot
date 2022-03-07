@@ -1,10 +1,7 @@
 const got = require('got')
-const { SlashCommandBuilder } = require('@discordjs/builders');
-
 module.exports ={
-    data: new SlashCommandBuilder()
-	    .setName('balance')
-		.setDescription('I love gambling..'),
+    name: 'car',
+    description: 'see some cool cars',
     execute(message, args){
         const { MessageEmbed } = require('discord.js');
             const embed = new MessageEmbed()
