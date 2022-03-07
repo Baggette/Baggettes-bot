@@ -1,11 +1,11 @@
 const got = require('got')
 module.exports ={
-    name: 'meme',
-    description: 'get a shitpost',
+    name: 'twitter',
+    description: 'get a dose of idiocy from twitter',
     execute(message, args){
         const { MessageEmbed } = require('discord.js');
             const embed = new MessageEmbed()
-        got('https://www.reddit.com/r/dankmemes/random/.json')
+        got('https://www.reddit.com/r/WhitePeopleTwitter/random/.json')
             .then(response => {
                 const [list] = JSON.parse(response.body);
                 const [post] = list.data.children;

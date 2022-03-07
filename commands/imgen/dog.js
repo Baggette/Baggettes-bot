@@ -1,11 +1,11 @@
 const got = require('got')
 module.exports ={
-    name: 'linuslore',
-    description: 'see some linus tech lore',
+    name: 'dog',
+    description: 'see a cute doggo',
     execute(message, args){
         const { MessageEmbed } = require('discord.js');
             const embed = new MessageEmbed()
-        got('https://www.reddit.com/r/linuslore/random/.json')
+        got('https://www.reddit.com/r/Cutedogsreddit/random/.json')
             .then(response => {
                 const [list] = JSON.parse(response.body);
                 const [post] = list.data.children;
