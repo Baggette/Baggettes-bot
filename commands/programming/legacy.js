@@ -1,11 +1,11 @@
 const got = require('got')
 module.exports ={
-    name: 'linusface',
-    description: 'see a face from the linus-verse',
+    name: 'legacy',
+    description: 'see a post from the legacy jailbreak subreddit',
     execute(message, args){
         const { MessageEmbed } = require('discord.js');
             const embed = new MessageEmbed()
-        got('https://www.reddit.com/r/LinusFaces/random/.json')
+        got('https://www.reddit.com/r/LegacyJailbreak/random/.json')
             .then(response => {
                 const [list] = JSON.parse(response.body);
                 const [post] = list.data.children;

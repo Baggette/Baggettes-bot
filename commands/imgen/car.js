@@ -1,11 +1,14 @@
 const got = require('got')
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 module.exports ={
-    name: 'linuslore',
-    description: 'see some linus tech lore',
+    data: new SlashCommandBuilder()
+		.setName('balance')
+		.setDescription('I love gambling..'),
     execute(message, args){
         const { MessageEmbed } = require('discord.js');
             const embed = new MessageEmbed()
-        got('https://www.reddit.com/r/linuslore/random/.json')
+        got('https://www.reddit.com/r/carphotography/random/.json')
             .then(response => {
                 const [list] = JSON.parse(response.body);
                 const [post] = list.data.children;
