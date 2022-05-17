@@ -25,7 +25,9 @@ module.exports ={
             { name: '`gprefix`', value: 'View the bots prefix'},
             { name: '`gsource`', value: 'View the bots source code'},
             { name: '`gtwitter`', value: 'View a post from some idiots on twitter'},
-            { name: '`guptime`', value: 'View bot uptime'}, 
+            { name: '`guptime`', value: 'View bot uptime'},
+            { name: '`gban`', value: 'Bans a mentioned user'},
+            { name: '`gkick`', value: 'Kicks a mentioned user'},
         )
         .setTimestamp()
         .setFooter({ text: 'This bot was lovingly made by Baggette#4777', iconURL: 'https://cdn.discordapp.com/avatars/887756464020672523/5261d8f56ece38a54d1e88d3316310b6.jpg?size=1024'})
