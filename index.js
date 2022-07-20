@@ -5,13 +5,11 @@ const got = require('got');
 const Prefix = "g"
 const Discord = require('discord.js');
 const fs = require('fs');
-const db = require('quick.db')
-const ms = require('parse-ms')
-const prettyMilliseconds = require('pretty-ms')
 const client = new Client({
     intents: [
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES
+        "Guilds",
+        "GuildMessages",
+        "MessageContent"
     ]
 });
 client.commands = new Discord.Collection();

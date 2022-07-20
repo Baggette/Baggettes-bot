@@ -3,8 +3,8 @@ module.exports ={
     name: 'twitter',
     description: 'get a dose of idiocy from twitter',
     execute(message, args){
-        const { MessageEmbed } = require('discord.js');
-            const embed = new MessageEmbed()
+        const {EmbedBuilder} = require('discord.js');
+            const embed = new EmbedBuilder()
         got('https://www.reddit.com/r/WhitePeopleTwitter/random/.json')
             .then(response => {
                 const [list] = JSON.parse(response.body);

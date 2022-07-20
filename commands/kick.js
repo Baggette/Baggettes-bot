@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js')
+const {EmbedBuilder} = require('discord.js')
 
 module.exports ={
     name: 'kick',
@@ -24,7 +24,7 @@ module.exports ={
         if(target.id === message.author.id) return message.reply(`I can't kick you as you are the Boss`)
         
         if(target.bannable) {
-          let embed = new MessageEmbed()
+          let embed = new EmbedBuilder()
                     .setAuthor(`${message.author.username} - (${message.author.id})`, message.author.displayAvatarURL({dynamic: true}))
                     .setThumbnail(mentionedMember.user.displayAvatarURL({dynamic: true}))
                     .setColor(`RANDOM`)

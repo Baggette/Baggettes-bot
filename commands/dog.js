@@ -3,8 +3,8 @@ module.exports ={
     name: 'dog',
     description: 'see a cute doggo',
     execute(message, args){
-        const { MessageEmbed } = require('discord.js');
-            const embed = new MessageEmbed()
+        const {EmbedBuilder} = require('discord.js');
+            const embed = new EmbedBuilder()
         got('https://www.reddit.com/r/Cutedogsreddit/random/.json')
             .then(response => {
                 const [list] = JSON.parse(response.body);

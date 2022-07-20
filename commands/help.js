@@ -1,10 +1,10 @@
- const { MessageEmbed } = require('discord.js')
+ const {EmbedBuilder} = require('discord.js')
 
 module.exports ={
     name: 'help',
     description: 'get a list of bot commands',
     execute(message, args){
-        const help = new MessageEmbed()
+        const help = new EmbedBuilder()
         .setColor('#f5e942')
         .setTitle('Baggettes Bot')
         .setURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ')

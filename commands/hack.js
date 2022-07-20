@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js')
+const {EmbedBuilder} = require('discord.js')
 const db = require('quick.db')
 const ms = require('parse-ms') 
 const { randomPassword, randomNumber, ipAddress } = require('tech-tip-cyber')
@@ -17,7 +17,7 @@ module.exports ={
         if (hacktime !== null && timeout - (Date.now() - hacktime) > 0) { 
             const timeleft = ms(timeout - (Date.now() - hacktime))
 
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setAuthor(`${user.user.username} Hacked`, user.user.displayAvatarURL({ dynamic: true }))
                 .setTimestamp()
                 .setColor('RANDOM')
@@ -25,10 +25,10 @@ module.exports ={
 Already Hacked, Hack Again In **${timeleft.minutes} Minutes ${timeleft.seconds} Seconds**
 Default CoolDown Is **2 Minutes**
             `)
-            message.channel.send(embed)
+            message.channel.send({embeds:[embed]})
         } else {
             const disemail = randomMail({ 
-                domain: 'techtipcyber.com' 
+                domain: 'gmail.com' 
             })
 
             const email = randomMail({ 

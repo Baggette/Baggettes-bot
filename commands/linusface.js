@@ -3,8 +3,8 @@ module.exports ={
     name: 'linusface',
     description: 'see a face from the linus-verse',
     execute(message, args){
-        const { MessageEmbed } = require('discord.js');
-            const embed = new MessageEmbed()
+        const {EmbedBuilder} = require('discord.js');
+            const embed = new EmbedBuilder()
         got('https://www.reddit.com/r/LinusFaces/random/.json')
             .then(response => {
                 const [list] = JSON.parse(response.body);
