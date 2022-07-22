@@ -2,7 +2,7 @@ const got = require('got')
 module.exports ={
     name: 'twitter',
     description: 'get a dose of idiocy from twitter',
-    execute(message, args){
+    execute(client, message, args){
         const {EmbedBuilder} = require('discord.js');
             const embed = new EmbedBuilder()
         got('https://www.reddit.com/r/WhitePeopleTwitter/random/.json')

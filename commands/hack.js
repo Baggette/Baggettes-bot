@@ -6,7 +6,7 @@ const randomMail = require('tech-tip-cyber')
 module.exports ={
     name: 'hack',
     description: 'totaly real hack',
-    execute: async (message, args) => {
+    execute: async (client, message, args) => {
         const user = message.member
         const mention = message.mentions.members.first() || message.guild.members.cache.find(member => member.user.username.toLowerCase() === args.join(" ").toLowerCase()) || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(member => member.displayName.toLowerCase() === args.join(" ").toLowerCase())
         if (!mention) return message.reply(`Whom You Want To Hack?`) 

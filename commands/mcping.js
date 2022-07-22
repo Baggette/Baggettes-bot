@@ -7,7 +7,7 @@ const options = {
 module.exports ={
     name: 'mcping',
     description: 'Ping a minecraft server',
-    execute(message, args){
+    execute(client, message, args){
         const server_ip = args[0]
         const server_port_string = args[1]
         const server_port = parseInt(server_port_string)

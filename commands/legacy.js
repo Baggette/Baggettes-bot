@@ -2,7 +2,7 @@ const got = require('got')
 module.exports ={
     name: 'legacy',
     description: 'see a post from the legacy jailbreak subreddit',
-    execute(message, args){
+    execute(client, message, args){
         const {EmbedBuilder} = require('discord.js');
             const embed = new EmbedBuilder()
         got('https://www.reddit.com/r/LegacyJailbreak/random/.json')

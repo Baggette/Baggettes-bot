@@ -2,7 +2,7 @@ const got = require('got')
 module.exports ={
     name: 'car',
     description: 'see some cool cars',
-    execute(message, args){
+    execute(client, message, args){
         const {EmbedBuilder} = require('discord.js');
             const embed = new EmbedBuilder()
         got('https://www.reddit.com/r/carphotography/random/.json')

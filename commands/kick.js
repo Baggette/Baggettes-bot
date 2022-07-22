@@ -1,9 +1,9 @@
-const {EmbedBuilder} = require('discord.js')
+/*const {EmbedBuilder} = require('discord.js')
 
 module.exports ={
     name: 'kick',
     description: 'kicks a user',
-    execute(message, args, client){
+    execute(client, message, args){
       const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         const target = message.mentions.members.first()
         
@@ -43,4 +43,4 @@ module.exports ={
           return message.reply(`I can't kick them, make sure that my role is above of theirs`)
         }
         return undefined
-    }}
+    }}*/

@@ -3,7 +3,7 @@
 module.exports ={
     name: 'help',
     description: 'get a list of bot commands',
-    execute(message, args){
+    execute(client, message, args){
         const help = new EmbedBuilder()
         .setColor('#f5e942')
         .setTitle('Baggettes Bot')

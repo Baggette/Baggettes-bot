@@ -2,7 +2,7 @@ const got = require('got')
 module.exports ={
     name: 'dog',
     description: 'see a cute doggo',
-    execute(message, args){
+    execute(client, message, args){
         const {EmbedBuilder} = require('discord.js');
             const embed = new EmbedBuilder()
         got('https://www.reddit.com/r/Cutedogsreddit/random/.json')
