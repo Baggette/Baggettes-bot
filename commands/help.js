@@ -28,7 +28,8 @@ module.exports ={
             { name: '`guptime`', value: 'View bot uptime'},
             { name: '`gban`', value: 'Bans a mentioned user'},
             { name: '`gkick`', value: 'Kicks a mentioned user'},
-            { name: '`gmcping <server ip> <server port>`', value:"Pings a desired minecraft server. **java only**"}
+            { name: '`gmcping <server ip> <server port>`', value:"Pings a desired minecraft server. **java only**"},
+            {name:"`gmusic`", value:"See the music cmds for this bot"}
         )
         .setTimestamp()
         .setFooter({ text: 'This bot was lovingly made by Baggette#4777', iconURL: 'https://cdn.discordapp.com/avatars/887756464020672523/5261d8f56ece38a54d1e88d3316310b6.jpg?size=1024'})
