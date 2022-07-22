@@ -47,7 +47,7 @@ client.on('messageCreate', (message) => { // You can use one block for an entire
         return
     }
 
-    client.commands.get(command).execute(client, message, agrs)
+    client.commands.get(command).execute(client, message, args)
 
 });
 const status = queue =>
