@@ -21,7 +21,7 @@ module.exports ={
                 embed.setURL(`${memeUrl}`);
                 embed.setColor('#f5e942');
                 embed.setImage(memeImage);
-                embed.setFooter(`👍 ${memeUpvotes} 💬 ${memeNumComments}`);
+                embed.setFooter({text:`👍 ${memeUpvotes} 💬 ${memeNumComments}`});
     
                 message.channel.send({ embeds: [embed] })
             })
