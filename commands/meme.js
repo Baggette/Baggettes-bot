@@ -10,7 +10,6 @@ module.exports ={
             .then(response => {
                 const [list] = JSON.parse(response.body);
                 const [post] = list.data.children;
-                console.log(post)
                 const permalink = post.data.permalink;
                 const memeUrl = `https://reddit.com${permalink}`;
                 const memeImage = post.data.url;
