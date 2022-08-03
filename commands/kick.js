@@ -4,7 +4,7 @@ module.exports={
   execute: async(client, message, args) =>{
       const guild = await client.guilds.fetch(message.guildId)
        if(!args[0]){
-           message.channel.send("Please mention someone to bkick or provide their id")
+           message.channel.send("Please mention someone to kick or provide their id")
       }else if(args[0]){
            if(!guild.members.me.permissions.has('KickMembers')){
               message.channel.send('I cannot ban this person')
