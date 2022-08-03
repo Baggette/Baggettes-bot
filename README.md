@@ -4,7 +4,7 @@ My first attempt at a discord bot. Things may break
 If you just want to add the bot [click this link](https://discord.com/api/oauth2/authorize?client_id=928069129892663347&permissions=137509588038&scope=bot)
 To self host the bot you must first make a bot on the [Discord Developer Portal](https://discord.com/developers/applications)
 you will need nodejs
- step 1
+ step 1<br>
 Make a new application on the portal
  step 2
 Name it whatever you want
