@@ -1,46 +1,27 @@
-/*const {EmbedBuilder} = require('discord.js')
-
-module.exports ={
-    name: 'kick',
-    description: 'kicks a user',
-    execute(client, message, args){
-      const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-        const target = message.mentions.members.first()
-        
-        const reason = args.slice(1).join(" ")
-        
-        if(!message.member.permissions.has("KICK_MEMBERS")) return message.reply(`You don't have enough powers to kick someone`)
-        
-        if(!message.guild.me.permissions.has("KICK_MEMBERS")) return message.reply(`I don't have powers to kick someone`)
-        
-        if(!args[0]) return message.reply(`Please mention someone to kick`)
-        
-        if(!target) return message.reply(`I can't find that member`)
-        
-        if(target.roles.highest.position >= message.member.roles.highest.position || message.author.id !== message.guild.ownerId) {
-          return message.reply(`They have more power than you`)
-        }
-        
-        if(target.id === message.author.id) return message.reply(`I can't kick you as you are the Boss`)
-        
-        if(target.bannable) {
-          let embed = new EmbedBuilder()
-                    .setAuthor(`${message.author.username} - (${message.author.id})`, message.author.displayAvatarURL({dynamic: true}))
-                    .setThumbnail(mentionedMember.user.displayAvatarURL({dynamic: true}))
-                    .setColor(`RANDOM`)
-                    .setDescription(`
-        **Member Kicked**
-        **Member:** ${mentionedMember.user.username} - (${mentionedMember.user.id})
-        **Reason:** ${reason || "None"}
-                    `)
-          message.channel.send({embeds:[embed]})
-          
-          target.kick()
-          
-          message.delete()
-          
-        } else {
-          return message.reply(`I can't kick them, make sure that my role is above of theirs`)
-        }
-        return undefined
-    }}*/
+module.exports={
+  name:"kick",
+  description:"Kicks a mentioned user",
+  execute: async(client, message, args) =>{
+      const guild = await client.guilds.fetch(message.guildId)
+       if(!args[0]){
+           message.channel.send("Please mention someone to bkick or provide their id")
+      }else if(args[0]){
+           if(!guild.members.me.permissions.has('KickMembers')){
+              message.channel.send('I cannot ban this person')
+          return 
+      }else if(!message.member.permissions.has("KickMembers")){
+          message.channel.send(`You do not have perms to ban \```${args[0]}\````)
+      } 
+               const rawid1 =  args[0].replace("@", "")
+               const rawdid2 = rawid1.replace("<", "")
+               const id = rawdid2.replace(">", "")
+              console.log(id)
+              
+              guild.members.kick(id)
+              .then(user => message.channel.send(`<@${id}> was successfully kicked`))
+              .catch((err) =>{
+                message.channel.send(`An error occorred: ${err}`)
+              })
+       }
+  }
+}

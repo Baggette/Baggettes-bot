@@ -1,46 +1,27 @@
-/*const {EmbedBuilder} = require('discord.js')
-
-module.exports ={
-    name: 'ban',
-    description: 'Bans a user',
-    execute(client, message, args){
-      const mentionedMember = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-        const target = message.mentions.members.first()
-        
-        const reason = args.slice(1).join(" ")
-        
-        if(!message.member.permissions.has("BAN_MEMBERS")) return message.reply(`You don't have enough powers to ban someone`)
-        
-        if(!message.guild.me.permissions.has("BAN_MEMBERS")) return message.reply(`I don't have powers to ban someone`)
-        
-        if(!args[0]) return message.reply(`Please mention someone to ban`)
-        
-        if(!target) return message.reply(`I can't find that member`)
-        
-        if(target.roles.highest.position >= message.member.roles.highest.position || message.author.id !== message.guild.ownerId) {
-          return message.reply(`They have more power than you`)
-        }
-        
-        if(target.id === message.author.id) return message.reply(`I can't ban you as you are the Boss`)
-        
-        if(target.bannable) {
-          let embed = new EmbedBuilder()
-                    .setAuthor(`${message.author.username} - (${message.author.id})`, message.author.displayAvatarURL({dynamic: true}))
-                    .setThumbnail(mentionedMember.user.displayAvatarURL({dynamic: true}))
-                    .setColor(`RANDOM`)
-                    .setDescription(`
-        **Member Banned**
-        **Member:** ${mentionedMember.user.username} - (${mentionedMember.user.id})
-        **Reason:** ${reason || "None"}
-                    `)
-          message.channel.send({embeds:[embed]})
-          
-          target.ban()
-          
-          message.delete()
-          
-        } else {
-          return message.reply(`I can't ban them, make sure that my role is above of theirs`)
-        }
-        return undefined
-    }}*/
+module.exports={
+  name:"ban",
+  description:"Bans a mentioned user",
+  execute: async(client, message, args) =>{
+      const guild = await client.guilds.fetch(message.guildId)
+       if(!args[0]){
+           message.channel.send("Please mention someone to ban or provide their id")
+      }else if(args[0]){
+           if(!guild.members.me.permissions.has('BanMembers')){
+              message.channel.send('I cannot ban this person')
+          return 
+      }else if(!message.member.permissions.has("BanMembers")){
+          message.channel.send(`You do not have perms to ban \```${args[0]}\````)
+      } 
+               const rawid1 =  args[0].replace("@", "")
+               const rawdid2 = rawid1.replace("<", "")
+               const id = rawdid2.replace(">", "")
+              console.log(id)
+              
+              guild.members.ban(id)
+              .then(user => message.channel.send(`<@${id}> was successfully banned`))
+              .catch((err) =>{
+                message.channel.send(`an error occorred: ${err}`)
+              })
+              }
+  }
+}
