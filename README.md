@@ -2,7 +2,7 @@
 My first attempt at a discord bot. Things may break
 
 If you just want to add the bot [click this link](https://discord.com/api/oauth2/authorize?client_id=928069129892663347&permissions=137509588038&scope=bot)
-To self host the bot you must first make a bot on the [Discord Developer Portal](https://discord.com/developers/applications)
+To self host the bot you must first make a bot on the [Discord Developer Portal](https://discord.com/developers/applications)<br>
 for the space command to work properly you need a nasa api key and it needs to be placed in the env file
 
 you will need nodejs
