@@ -5,26 +5,26 @@ If you just want to add the bot [click this link](https://discord.com/api/oauth2
 To self host the bot you must first make a bot on the [Discord Developer Portal](https://discord.com/developers/applications)
 you will need nodejs
  step 1<br>
-Make a new application on the portal
+Make a new application on the portal<br>
  step 2<br>
-Name it whatever you want
+Name it whatever you want<br>
  step 3<br>
-go to the bot tab
+go to the bot tab<br>
  step 4<br>
-click add bot
+click add bot<br>
  step 5<br>
-Click yes do it
+Click yes do it<br>
  step 6<br>
-Click reset token and copy the token for later
+Click reset token and copy the token for later<br>
  step 7<br>
-Download a zip of this project or git clone it
+Download a zip of this project or git clone it<br>
  step 8 (only if you downloaded a zip)<br>
-unzip the file you just downloaded
+unzip the file you just downloaded<br>
  step 9 <br>
-cd into the directory
+cd into the directory<br>
  step 10<br>
 run `npm i`
-wait for it to finish
+wait for it to finish<br>
  step 11 <br>
-edit the example.env file and replace YOUR BOTTOKEN HERE with your bot token, save as .env and run `node .` and you should be set
+edit the example.env file and replace YOUR BOTTOKEN HERE with your bot token, save as .env and run `node .` and you should be set<br>
 
