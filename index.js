@@ -6,6 +6,7 @@ const Prefix = "g"
 const Discord = require('discord.js');
 const fs = require('fs');
 const { DisTube } = require('distube')
+
 const client = new Client({
     intents: [
         "Guilds",
@@ -32,9 +33,25 @@ for (const file of commandFiles) {
 
     client.commands.set(command.name, command)
 }
+
 client.on('ready', () => {
     console.log('g is online')
     client.user.setPresence({ activities: [{ name: 'Listening to ghelp' }], status: 'active' });
+    setInterval( () => {
+        got("https://api.chucknorris.io/jokes/random")
+        .then(responce =>{
+            const norris = JSON.parse(responce.body)
+            const embed = new EmbedBuilder()
+            .setTitle(`Chuck Norris`)
+            .setURL(`${norris.url}`)
+            .setColor('#f5e942')
+            .setDescription(`${norris.value}`)
+            .setTimestamp()
+            client.channels.cache.get("1004197872104902726").send({embeds:[embed]})
+        })
+        .catch((err) =>{
+            channel.send(`An error occorred: ${err}`)
+        })}, 600000)
 });
 // command
 client.on('messageCreate', (message) => { // You can use one block for an entire event
@@ -46,7 +63,7 @@ client.on('messageCreate', (message) => { // You can use one block for an entire
     if (!client.commands.get(command)) {
         return
     }
-
+      
     client.commands.get(command).execute(client, message, args)
 
 });
