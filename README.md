@@ -6,25 +6,25 @@ To self host the bot you must first make a bot on the [Discord Developer Portal]
 you will need nodejs
  step 1<br>
 Make a new application on the portal
- step 2
+ step 2<br>
 Name it whatever you want
- step 3
+ step 3<br>
 go to the bot tab
- step 4
+ step 4<br>
 click add bot
- step 5
+ step 5<br>
 Click yes do it
- step 6
+ step 6<br>
 Click reset token and copy the token for later
- step 7
+ step 7<br>
 Download a zip of this project or git clone it
- step 8 (only if you downloaded a zip)
+ step 8 (only if you downloaded a zip)<br>
 unzip the file you just downloaded
- step 9 
+ step 9 <br>
 cd into the directory
- step 10
+ step 10<br>
 run `npm i`
 wait for it to finish
- step 11 
-edit the .env file and replace YOUR BOTTOKEN HERE with your bot toke, save and run `node .` and you should be set
+ step 11 <br>
+edit the example.env file and replace YOUR BOTTOKEN HERE with your bot token, save as .env and run `node .` and you should be set
 
