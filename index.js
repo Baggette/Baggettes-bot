@@ -51,7 +51,7 @@ client.on('ready', () => {
         })
         .catch((err) =>{
             channel.send(`An error occorred: ${err}`)
-        })}, 600000)
+        })}, 86400000)
 });
 // command
 client.on('messageCreate', (message) => { // You can use one block for an entire event
