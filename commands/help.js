@@ -42,7 +42,7 @@ module.exports ={
             { name: '`guptime`', value: 'View bot uptime'},
             { name: '`gban`', value: 'Bans a mentioned user'},
             { name: '`gkick`', value: 'Kicks a mentioned user'},
-            { name: '`gmcping <server ip> <server port>`', value:"Pings a desired minecraft server. **java only**"},
+            { name: '`gmcping <server ip> <server port> [mcpe (bedrock pinging)]`', value:"Pings a desired minecraft server."},
             { name:"`gmusic`", value:"See the music cmds for this bot"},
             { name:"`gguess`", value:"Play a guessing game where the bot will guess a character"},
             { name:"`gfact`", value:"See a random fact"},

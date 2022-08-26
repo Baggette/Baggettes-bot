@@ -1,7 +1,7 @@
 const util = require('minecraft-server-util');
 const {EmbedBuilder} = require('discord.js');
 const options = {
-    timeout: 1000 * 5, // timeout in milliseconds
+    //timeout: 1000 * 5, // timeout in milliseconds
     enableSRV: true // SRV record lookup
 };
 module.exports ={
@@ -15,23 +15,20 @@ module.exports ={
             message.channel.send("Please specify the server ip.")
         }else if(!args[1]){
             message.channel.send("Please specify the server port.")
-        }else if(args[0] && args[1]){
+        }else if(args[0] && args[1] && !args[2]){
             util.status(server_ip, server_port, options)
     .then((result) => {
-        
-        const string1 = JSON.stringify(result);// turn the object into a string
-        const string = JSON.parse(string1);// make the string parsable
         const embed = new EmbedBuilder()
     .setColor("#00FF00")
-    .setTitle("Minecraft server status")
+    .setTitle("Java server status")
     .setDescription(`This will show the status and info about the minecraft server \n **Server ip:** ${server_ip} \n **Server port:** ${server_port}`)
     .addFields(
-        {name:"Server Version", value: `${string.version.name}`},
-        {name:"Server Protocol Version", value:`${string.version.protocol}`},
-        {name:"Players Online", value:`${string.players.online}`},
-        {name:"Max Players", value:`${string.players.max}`},
-        {name:"Message Of The Day (MOTD)", value:`${string.motd.clean}`},
-        {name:"Latency", value:`${string.roundTripLatency}`},
+        {name:"Server Version", value: `${result.version.name}`},
+        {name:"Server Protocol Version", value:`${result.version.protocol}`},
+        {name:"Players Online", value:`${result.players.online}`},
+        {name:"Max Players", value:`${result.players.max}`},
+        {name:"Message Of The Day (MOTD)", value:`${result.motd.clean}`},
+        {name:"Latency", value:`${result.roundTripLatency}`},
     )
     .setTimestamp()
     message.channel.send({embeds: [embed]})// send the embed
@@ -41,14 +38,42 @@ module.exports ={
     console.log(error);// if the server was unable to be pinged or something else happened
     const embed = new EmbedBuilder()
     .setColor("#808080")
-    .setTitle("There waa an error preforming your command")
+    .setTitle("There was an error preforming your command")
     .setDescription(`The server was unable to be pinged or you provied the wrong information`)
     .setTimestamp()
     message.channel.send({embeds: [embed]})// send the embed
     
-    });
-        }
+    })
         
-
-    }   
+    }else if(args[0] && args[1] && args[2] == "bedrock" || args[2] == "mcpe"){
+        util.statusBedrock(server_ip, server_port, options)
+    .then((result) => {
+        const embed = new EmbedBuilder()
+    .setColor("#00FF00")
+    .setTitle("Bedrock server status")
+    .setDescription(`This will show the status and info about the minecraft server \n **Server ip:** ${server_ip} \n **Server port:** ${server_port}`)
+    .addFields(
+        {name:"Server Version", value: `${result.version.name}`},
+        {name:"Server Protocol Version", value:`${result.version.protocol}`},
+        {name:"Players Online", value:`${result.players.online}`},
+        {name:"Max Players", value:`${result.players.max}`},
+        {name:"Message Of The Day (MOTD)", value:`${result.motd.clean}`},
+        {name:"Gamemode", value:`${result.gameMode}`}
+    )
+    .setTimestamp()
+    message.channel.send({embeds: [embed]})// send the embed
+    })
+    
+    .catch((error) => {
+    console.log(error);// if the server was unable to be pinged or something else happened
+    const embed = new EmbedBuilder()
+    .setColor("#808080")
+    .setTitle("There was an error preforming your command")
+    .setDescription(`The server was unable to be pinged or you provied the wrong information`)
+    .setTimestamp()
+    message.channel.send({embeds: [embed]})// send the embed
+    
+    })
+    }
+    }
 }
