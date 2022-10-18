@@ -39,8 +39,8 @@ client.on('ready', () => {
     client.user.setPresence({ activities: [{ name: 'Listening to ghelp' }], status: 'active' });
     setInterval( () => {
         got("https://api.chucknorris.io/jokes/random")
-        .then(responce =>{
-            const norris = JSON.parse(responce.body)
+        .then(response =>{
+            const norris = JSON.parse(response.body)
             const embed = new EmbedBuilder()
             .setTitle(`Chuck Norris`)
             .setURL(`${norris.url}`)
