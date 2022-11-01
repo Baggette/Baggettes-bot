@@ -1,10 +1,11 @@
-const {Client, Intents, EmbedBuilder} = require('discord.js');
+const {Client, Intents, EmbedBuilder, Events, GatewayIntentBits } = require('discord.js');
 const dotenv = require('dotenv');
 dotenv.config();
 const got = require('got');
 const Prefix = "g"
 const Discord = require('discord.js');
 const fs = require('fs');
+const path = require('node:path');
 const { DisTube } = require('distube')
 
 const client = new Client({
@@ -12,7 +13,8 @@ const client = new Client({
         "Guilds",
         "GuildMessages",
         "MessageContent",
-        "GuildVoiceStates"
+        "GuildVoiceStates",
+        GatewayIntentBits.Guilds
     ]
 });
 const { YtDlpPlugin } = require('@distube/yt-dlp')
@@ -26,6 +28,22 @@ client.distube = new DisTube(client, {
   ]
 })
 client.commands = new Discord.Collection();
+
+client.slashcommands = new Discord.Collection();
+
+const slashcommandsPath = path.join(__dirname, 'slash');
+const slashcommandFiles = fs.readdirSync(slashcommandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of slashcommandFiles) {
+	const filePath = path.join(slashcommandsPath, file);
+	const slashcommand = require(filePath);
+	// Set a new item in the Collection with the key as the command name and the value as the exported module
+	if ('data' in slashcommand && 'execute' in slashcommand) {
+		client.slashcommands.set(slashcommand.data.name, slashcommand);
+	} else {
+		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+	}
+}
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
@@ -52,6 +70,24 @@ client.on('ready', () => {
         .catch((err) =>{
             channel.send(`An error occorred: ${err}`)
         })}, 86400000)
+});
+
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+
+	const slash = interaction.client.slashcommands.get(interaction.commandName);
+
+	if (!slash) {
+		console.error(`No command matching ${interaction.commandName} was found.`);
+		return;
+	}
+
+	try {
+		await slash.execute(interaction);
+	} catch (error) {
+		console.error(`Error executing ${interaction.commandName}`);
+		console.error(error);
+	}
 });
 // command
 client.on('messageCreate', (message) => { // You can use one block for an entire event
