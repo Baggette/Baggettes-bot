@@ -83,7 +83,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 
 	try {
-		await slash.execute(interaction);
+		await slash.execute(interaction, client);
 	} catch (error) {
 		console.error(`Error executing ${interaction.commandName}`);
 		console.error(error);
