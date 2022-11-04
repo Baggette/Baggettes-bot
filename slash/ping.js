@@ -4,7 +4,7 @@ const wait = require('node:timers/promises').setTimeout;
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
-		.setDescription('Replies with Pong!'),
+		.setDescription('Shows bot latency'),
 	async execute(interaction, client) {
 		const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true });
 		wait(4000)
