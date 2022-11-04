@@ -24,8 +24,7 @@ module.exports={
         try {
             const target = interaction.options.getMember("target")
             const time = interaction.options.getInteger("time")
-            target.timeout(time * 60_000)
-            await wait(3000)
+            await target.timeout(time * 60_000)
             await interaction.editReply(`Successfully timed out ${target} for ${time} minutes`)
         }
         catch(err){

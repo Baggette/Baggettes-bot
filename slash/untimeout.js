@@ -17,7 +17,7 @@ module.exports={
         await interaction.deferReply()
         try{
         const target = interaction.options.getMember("target")
-        target.timeout(null)
+        await target.timeout(null)
         await wait(3000)
         await interaction.editReply(`Successfully removed the timeout on ${target}!`)
         }
