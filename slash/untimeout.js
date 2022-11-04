@@ -22,6 +22,7 @@ module.exports={
         await interaction.editReply(`Successfully removed the timeout on ${target}!`)
         }
         catch(err){
+        const target = interaction.options.getUser("target")
         await interaction.editReply(`I was unable to remove the timeout on ${target} \n ${err}`)
         }
         

@@ -18,13 +18,14 @@ module.exports={
     async execute(interaction) {
         interaction.deferReply()
         try{
-        const target = interaction.options.getUser("target");
-        const reason = interaction.options.getString("reason") ?? "No reason provided";
-        await interaction.editReply(`Kicked ${target.username} for \`${reason}\``)
-        await interaction.guild.members.kick(target)
+            const target = interaction.options.getUser("target");
+            const reason = interaction.options.getString("reason") ?? "No reason provided";
+            await interaction.editReply(`Kicked ${target.username} for \`${reason}\``)
+            await interaction.guild.members.kick(target)
         }
         catch(err){
-        await interaction.editReply(`I was unable to kick ${target} \n ${err}`)   
+            const target = interaction.options.getUser("target")
+            await interaction.editReply(`I was unable to kick ${target} \n ${err}`)   
         }
     },
 };

@@ -18,13 +18,14 @@ module.exports={
     async execute(interaction) {
         interaction.deferReply()
         try{
-        const target = interaction.options.getUser("target");
-        const reason = interaction.options.getString("reason") ?? "No reason provided";
-        await interaction.editReply(`Banning ${target.username} for \`${reason}\``)
-        await interaction.guild.members.ban(target)
+            const target = interaction.options.getUser("target");
+            const reason = interaction.options.getString("reason") ?? "No reason provided";
+            await interaction.editReply(`Banning ${target.username} for \`${reason}\``)
+            await interaction.guild.members.ban(target)
         }
         catch(err){
-        await interaction.editReply(`I was unable to ban ${target} \n ${err}`)   
+            const target = interaction.options.getUser("target");
+            await interaction.editReply(`I was unable to ban ${target} \n ${err}`)   
         }
     },
 };
