@@ -16,7 +16,7 @@ module.exports={
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
     .setDMPermission(false),
     async execute(interaction) {
-        interaction.deferReply()
+        await interaction.deferReply()
         try{
             const target = interaction.options.getUser("target");
             const reason = interaction.options.getString("reason") ?? "No reason provided";
