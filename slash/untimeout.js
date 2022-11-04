@@ -15,10 +15,16 @@ module.exports={
     .setDMPermission(false),
     async execute(interaction){
         await interaction.deferReply()
+        try{
         const target = interaction.options.getMember("target")
         target.timeout(null)
         await wait(3000)
         await interaction.editReply(`Successfully removed the timeout on ${target}!`)
+        }
+        catch(err){
+        await interaction.editReply(`I was unable to remove the timeout on ${target} \n ${err}`)
+        }
+        
     }
 
 }

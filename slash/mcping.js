@@ -31,6 +31,7 @@ module.exports={
             {name:"bedrock", value:"bedrock"}
         )),
     async execute(interaction) {
+        await interaction.deferReply()
         const ip = interaction.options.getString("ip")
         const port = interaction.options.getString("port")
         const version = interaction.options.getString("version")
@@ -53,17 +54,15 @@ module.exports={
                 {name:"Latency", value:`${result.roundTripLatency}`},
             )
             .setTimestamp()
-            await interaction.deferReply()
             await wait(3000)
             await interaction.editReply({embeds: [embed]})// send the embed
             })
         .catch(async (err) => {
-            /*const embed = new EmbedBuilder()
+            const embed = new EmbedBuilder()
             .setColor("#808080")
             .setTitle("There was an error preforming your command")
             .setDescription(`The server was unable to be pinged or you provied the wrong information \n ${err}`)
             .setTimestamp()
-            await interaction.deferReply()
             await wait(3000)
             await interaction.editReply({embeds: [embed]})// send the embed*/
             console.log(err)
@@ -84,19 +83,17 @@ module.exports={
                 {name:"Gamemode", value:`${result.gameMode}`}
             )
             .setTimestamp()
-            await interaction.deferReply()
             await wait(3000)
             await interaction.editReply({embeds: [embed]})// send the embed
             })
             
             .catch(async (error) => {
             console.log(error);// if the server was unable to be pinged or something else happened
-            /*const embed = new EmbedBuilder()
+            const embed = new EmbedBuilder()
             .setColor("#808080")
             .setTitle("There was an error preforming your command")
             .setDescription(`The server was unable to be pinged or you provied the wrong information \n ${error}`)
             .setTimestamp()
-            await interaction.deferReply()
             await wait(3000)
             await interaction.editReply({embeds: [embed]})// send the embed*/
             
