@@ -4,7 +4,9 @@
   "description": "my first attepmt at a discord bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"node devdeploycmds.js",
+    "global":"node globaldeploycmds.js"
   },
   "author": "Baggette",
   "license": "ISC",
