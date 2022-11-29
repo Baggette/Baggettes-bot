@@ -6,7 +6,8 @@ module.exports={
     .addStringOption(option =>
         option
             .setName("text")
-            .setDescription("text for the no bitches meme")    
+            .setDescription("text for the no bitches meme")   
+            .setRequired(true) 
         ),
     async execute(interaction, client){
         await interaction.deferReply()
