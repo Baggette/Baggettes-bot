@@ -49,7 +49,8 @@ module.exports ={
             { name:"`gspace`", value:"See some cool space news"},
             { name:"`gjoke`", value:"Super funni joke"},
             { name:"`gnorris`", value:"See a norris joke/fact"},
-            { name:"`gpackage <package name>`", value:"Search for tweaks (wip)"}
+            { name:"`gpackage <package name>`", value:"Search for tweaks (wip)"},
+            { name:"`gnobitches <text>`", value:"Generate a no bitches meme"}
         )
         .setTimestamp()
         .setFooter({ text: 'This bot was lovingly made by Baggette#4777', iconURL: 'https://cdn.discordapp.com/avatars/887756464020672523/5261d8f56ece38a54d1e88d3316310b6.jpg?size=1024'})
