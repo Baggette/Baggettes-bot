@@ -10,10 +10,10 @@ module.exports={
             .setDescription('Word or phrase to define on urban dictonary')
             .setRequired(true)    
         ),
-    async execute(client, interaction, args){
+    async execute(interaction, client){
         const phrase = interaction.options.getString("word")
         await interaction.deferReply()
-        got(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(args.slice(0).join(" "))}`)
+        got(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(phrase)}`)
         .then( async response => {
             const json = JSON.parse(response.body)
             let clean_def = json.list[0].definition.replace(/[\[\]]/g, "")
