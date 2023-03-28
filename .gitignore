@@ -2,4 +2,3 @@ node_modules/
 .env
 json.sqlite
 space.json
-package-lock.json
