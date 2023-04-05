@@ -2,11 +2,11 @@ const {Client, Intents, EmbedBuilder, Events, GatewayIntentBits } = require('dis
 const dotenv = require('dotenv');
 dotenv.config();
 const got = require('got');
-const Prefix = "g"
 const Discord = require('discord.js');
 const fs = require('fs');
 const path = require('node:path');
 const { DisTube } = require('distube')
+const { Quickdb } = require('quick.db')
 
 const client = new Client({
     intents: [
@@ -90,7 +90,8 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 // command
-client.on('messageCreate', (message) => { // You can use one block for an entire event
+client.on('messageCreate', async (message) => { 
+    let Prefix = await db.get(`prefix_${message.guild.id}`) || "g";
     if (!message.content.startsWith(Prefix) || message.author.bot) return;
     const args = message.content.slice(Prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
