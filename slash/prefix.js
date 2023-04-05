@@ -1,7 +1,7 @@
-const { SlashCommandBuiler, EmbedBuilder } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 const { Quickdb } = require('quick.db')
 module.exports = {
-    data: new SlashCommandBuiler()
+    data: new SlashCommandBuilder()
     .setName('prefix')
     .setDescription('Shows the bots prefix or sets a new one!')
     .addStringOption(option => 
