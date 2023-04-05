@@ -6,7 +6,8 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const path = require('node:path');
 const { DisTube } = require('distube')
-const { Quickdb } = require('quick.db')
+const { QuickDB } = require('quick.db');
+const db = new QuickDB();
 
 const client = new Client({
     intents: [

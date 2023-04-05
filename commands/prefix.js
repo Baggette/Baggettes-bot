@@ -1,7 +1,7 @@
-const { PermissionFlagsBits } = require('discord-api-types');
 const { EmbedBuilder } = require('discord.js');
-const { Quickdb } = require('quick.db');
-module.exports ={
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+module.exports={
     name: 'prefix',
     description: 'see the bots prefix or set a new one',
     async execute(client, message, args){
@@ -13,7 +13,7 @@ module.exports ={
             .setTimestamp()
             message.channel.send({embeds:[prefix_embed]})
         }else{
-            if(!message.member.permission.has(PermissionsBitFields.Flags.ADMINISTRATOR)){
+            if(!message.member.permissions.has("Administrator")){
                 const no_permission_embed = new EmbedBuilder()
                 .setColor('#f5e942')
                 .setDescription(`You do not have permission to use this command!`)

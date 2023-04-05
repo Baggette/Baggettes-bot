@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
-const { Quickdb } = require('quick.db')
-module.exports = {
+const { QuickDB } = require("quick.db");
+const db = new QuickDB();
+module.exports={
     data: new SlashCommandBuilder()
     .setName('prefix')
     .setDescription('Shows the bots prefix or sets a new one!')
@@ -11,7 +12,7 @@ module.exports = {
         ),
     async execute(interaction, client){
         await interaction.deferReply()
-        const prefix = await db.get(`prefix_${message.guild.id}`) || "g";
+        const prefix = await db.get(`prefix_${interaction.guild.id}`) || "g";
         const new_prefix = interaction.options.getString('prefix')
         if(!interaction.options.getString('prefix')){
             const prefix_embed = new EmbedBuilder()
@@ -20,10 +21,10 @@ module.exports = {
             .setTimestamp()
             await interaction.editReply({embeds:[prefix_embed]})
         }
-        if(!interaction.member.permission.has(PermissionsBitFields.Flags.ADMINISTRATOR)){
+        if(!interaction.member.permissions.has("Administrator")){
         await interaction.editReply({content: `You do not have permission to use this command!`, ephemeral: true})
         }
-        await db.set(`prefix_${message.guild.id}`, new_prefix)
+        await db.set(`prefix_${interaction.guild.id}`, new_prefix)
         const prefix_embed = new EmbedBuilder()
         .setColor('#f5e942')
         .setDescription(`The bots prefix has been set to: \`${new_prefix}\``)
