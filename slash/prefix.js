@@ -21,7 +21,7 @@ module.exports={
             .setTimestamp()
             await interaction.editReply({embeds:[prefix_embed]})
         }
-        if(!interaction.member.permissions.has("Administrator")){
+        if(!interaction.member.permissions.has("ManageGuild")){
         await interaction.editReply({content: `You do not have permission to use this command!`, ephemeral: true})
         }
         await db.set(`prefix_${interaction.guild.id}`, new_prefix)
