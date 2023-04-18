@@ -1,32 +1,31 @@
 # Baggettes-bot
 My first attempt at a discord bot. Things may break
 
-If you just want to add the bot [click this link](https://discord.com/api/oauth2/authorize?client_id=928069129892663347&permissions=137509588038&scope=bot)
-To self host the bot you must first make a bot on the [Discord Developer Portal](https://discord.com/developers/applications)<br>
-for the space command to work properly you need a nasa api key and it needs to be placed in the env file
+To add the bot yourself, click [here](https://discord.com/api/oauth2/authorize?client_id=928069129892663347&permissions=137509588038&scope=bot). To host your own fork of the bot, please check below for instructions.
 
-you will need nodejs
- step 1<br>
-Make a new application on the portal<br>
- step 2<br>
-Name it whatever you want<br>
- step 3<br>
-go to the bot tab<br>
- step 4<br>
-click add bot<br>
- step 5<br>
-Click yes do it<br>
- step 6<br>
-Click reset token and copy the token for later<br>
- step 7<br>
-Download a zip of this project or git clone it<br>
- step 8 (only if you downloaded a zip)<br>
-unzip the file you just downloaded<br>
- step 9 <br>
-cd into the directory<br>
- step 10<br>
-run `npm i`
-wait for it to finish<br>
- step 11 <br>
-edit the example.env file and replace YOUR BOTTOKEN HERE with your bot token, save as .env and run `node .` and you should be set<br>
 
+## Self Hosting
+### Requirements
+- Your own bot (You can make this on the [Discord Developer Portal](https://discord.com/developers/applications))
+- A [NASA API Key](https://api.nasa.gov/). It must be placed in the `.env` file, with proper syntax.
+- Node.js, as well as an editor of some sort. [repl.it](https://replit.com) works great as an online editor.
+
+
+### Steps
+1. Make a new application on the portal
+2. Name it whatever you want
+3. go to the bot tab
+4. click add bot
+5. Click yes do it
+6. Click reset token and copy the token for later
+7. Download a zip of this project or git clone it
+8. **(only if you downloaded a zip)** unzip the file you just downloaded
+9. `cd` into the directory
+10. Run `npm i`. Wait for it to finish
+11. edit the `example.env` file and replace YOUR BOTTOKEN HERE with your bot token, save it as `.env` and run `node .` and you should be set!
+
+## Licensing
+This project is licensed under the GNU General Public License v3. You can see exactly what this entails [here](LICENSE).
+
+## Contributing
+No contributing file yet, will make one soon. In the meantime, feel free to make pull requests and then submit those.
