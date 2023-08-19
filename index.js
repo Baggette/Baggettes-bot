@@ -90,6 +90,9 @@ client.on('ready', () => {
     .catch((err) =>{
       channel.send(`An error occurred: ${err}`)
     })}, 86400000)
+    console.log(client.guilds.cache.map(guild => guild.name).reduce((previous,current) => {
+                return previous + "\n" + current
+            }, "").substring(2))
 });
 
 // On Slash Command
