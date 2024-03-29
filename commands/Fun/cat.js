@@ -4,7 +4,7 @@ module.exports={
     name:"cat",
     description:"see a pussy",
     async execute(client, message, args){
-        ("https://cataas.com/cat")
+        fetch("https://cataas.com/cat")
         .then(res => res.text())
         .then(body =>{
             const data = JSON.parse(body)
