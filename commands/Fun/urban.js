@@ -1,13 +1,14 @@
-const got = require("got")
+const fetch = require("node-fetch")
 const {EmbedBuilder} = require("discord.js")
 module.exports={
     name:"urban",
     description:"Search for a word on urban dictionary",
     execute(client, message, args){
         if(!args[0]) return message.channel.send("You did not provide a query")
-        got(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(args.slice(0).join(" "))}`)
-        .then( response => {
-            const json = JSON.parse(response.body)
+        fetch(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(args.slice(0).join(" "))}`)
+        .then(res => res.text())
+        .then( body => {
+            const json = JSON.parse(body)
             let clean_def = json.list[0].definition.replace(/[\[\]]/g, "")
             let clean_eg = json.list[0].example.replace(/[\[\]]/g, "")
             const embed = new EmbedBuilder()

@@ -1,4 +1,4 @@
-const got = require("got")
+const fetch = require("node-fetch")
 const {EmbedBuilder, SlashCommandBuilder} = require('discord.js')
 module.exports={
     data: new SlashCommandBuilder()
@@ -6,9 +6,10 @@ module.exports={
     .setDescription("Get a random fact"),
     async execute(interaction){
         interaction.deferReply()
-        got("https://uselessfacts.jsph.pl/random.json?language=en")
-        .then(async responce =>{
-            const fact = JSON.parse(responce.body)
+        fetch("https://uselessfacts.jsph.pl/random.json?language=en")
+        .then(res => res.text())
+        .then(async body =>{
+            const fact = JSON.parse(body)
             const embed = new EmbedBuilder()
             .setTitle("A random fact")
             .setURL(`${fact.source_url}`)

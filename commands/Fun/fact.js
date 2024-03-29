@@ -1,13 +1,14 @@
-const got = require("got")
+const fetch = require('node-fetch');
 const {EmbedBuilder} = require('discord.js')
 module.exports={
     name:"fact",
     description:"Get a random fact",
     execute(client, message, args){
         
-        got("https://uselessfacts.jsph.pl/random.json?language=en")
-        .then(responce =>{
-            const fact = JSON.parse(responce.body)
+        fetch("https://uselessfacts.jsph.pl/random.json?language=en")
+        .then(res => res.text())
+        .then(body =>{
+            const fact = JSON.parse(body)
             const embed = new EmbedBuilder()
             .setTitle("A random fact")
             .setURL(`${fact.source_url}`)

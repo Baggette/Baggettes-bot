@@ -1,13 +1,14 @@
-const got = require('got')
+const fetch = require('node-fetch');
 module.exports ={
     name: 'food',
     description: 'see some great food',
     execute(client, message, args){
         const {EmbedBuilder} = require('discord.js');
             const embed = new EmbedBuilder()
-        got('https://www.reddit.com/r/FoodPorn/random/.json')
-            .then(response => {
-                const [list] = JSON.parse(response.body);
+        fetch('https://www.reddit.com/r/FoodPorn/random/.json')
+            .then(res => res.text())
+            .then(body => {
+                const [list] = JSON.parse(body);
                 const [post] = list.data.children;
     
                 const permalink = post.data.permalink;

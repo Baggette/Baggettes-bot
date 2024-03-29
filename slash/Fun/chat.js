@@ -1,5 +1,5 @@
 const {SlashCommandBuilder} = require("discord.js");
-const got = require("got");
+const fetch = require("node-fetch");
 const dotenv = require("dotenv");
 dotenv.config();
 const Cooldown = require('cooldown.js');
@@ -33,9 +33,10 @@ module.exports={
          }
     try{ 
       const prompt = interaction.options.getString("prompt");
-      got(`${process.env.PALM_API_PROXY_URL}/?api_key=${process.env.PALM_API}&prompt=${"When responding to the following prompt, try to condense your response. Make sure it is under 2000 characters. Prompt: " + encodeURIComponent(prompt)}`)
-      .then(async res => {
-       const response = JSON.parse(res.body);
+      fetch(`${process.env.PALM_API_PROXY_URL}/?api_key=${process.env.PALM_API}&prompt=${"When responding to the following prompt, try to condense your response. Make sure it is under 2000 characters. Prompt: " + encodeURIComponent(prompt)}`)
+    .then(res => res.text())
+      .then(async body => {
+       const response = JSON.parse(body);
        const str = new String(response.response)
        if(str.length > 2000) return await interaction.editReply("An error occured");
         await interaction.editReply(response.response);

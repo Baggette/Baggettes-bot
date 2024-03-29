@@ -1,14 +1,13 @@
-const got = require('got')
+const fetch = require('node-fetch');
 const {EmbedBuilder} = require('discord.js');
 module.exports ={
     name: 'meme',
     description: 'get a shitpost',
-    execute(client, message, args){
-        
-            
-        got('https://www.reddit.com/r/dankmemes/random/.json')
-            .then(response => {
-                const [list] = JSON.parse(response.body);
+    execute(client, message, args){   
+        fetch('https://www.reddit.com/r/dankmemes/random/.json')
+            .then(res => res.text())
+            .then(body => {
+                const [list] = JSON.parse(body);
                 const [post] = list.data.children;
                 const permalink = post.data.permalink;
                 const memeUrl = `https://reddit.com${permalink}`;

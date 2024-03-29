@@ -1,5 +1,5 @@
 const {EmbedBuilder} = require("discord.js");
-const got = require("got");
+const fetch = require("node-fetch");
 const dotenv = require("dotenv");
 dotenv.config();
 const Cooldown = require('cooldown.js');
@@ -26,9 +26,10 @@ module.exports={
          }
     try{ 
       const prompt = args.slice(0).join(" ");
-      got(`${process.env.PALM_API_PROXY_URL}/?api_key=${process.env.PALM_API}&prompt=${encodeURIComponent(prompt)}`)
-      .then(res => {
-       const response = JSON.parse(res.body);
+      fetch(`${process.env.PALM_API_PROXY_URL}/?api_key=${process.env.PALM_API}&prompt=${encodeURIComponent(prompt)}`)
+    .then(res => res.text())
+      .then(body => {
+       const response = JSON.parse(body);
        const str = new String(response.response)
        if(str.length > 2000) return message.reply("sorry an error occured, please try again!");
         message.reply(response.response);

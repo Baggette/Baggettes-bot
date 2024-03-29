@@ -1,12 +1,13 @@
 const {EmbedBuilder} = require("discord.js")
-const got = require('got')
+const fetch = require("node-fetch")
 module.exports={
     name:"dog",
     description:"see a doggo",
     async execute(client, message, args){
-        got("https://dog.ceo/api/breeds/image/random")
-        .then(response =>{
-            const data = JSON.parse(response.body)
+        fetch("https://dog.ceo/api/breeds/image/random")
+        .then(res => res.text())
+        .then(body =>{
+            const data = JSON.parse(body)
             const embed = new EmbedBuilder()
             .setTitle("Doggos")
             .setColor('#f5e942')

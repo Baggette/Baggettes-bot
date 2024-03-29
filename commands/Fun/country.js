@@ -1,13 +1,14 @@
-const got = require("got")
+const fetch = require('node-fetch');
 const {EmbedBuilder} = require("discord.js")
 module.exports={
     name:"country",
     description:"See information about a country",
     execute(client, message, args){0
         if(!args[0]) return message.channel.send("No country provided")
-        got(`https://restcountries.com/v3.1/name/${encodeURIComponent(args.slice(0).join(" "))}?fullText=true`)
-        .then( response => {
-            const json = JSON.parse(response.body)
+        fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(args.slice(0).join(" "))}?fullText=true`)
+        .then(res => res.text())
+        .then(body => {
+            const json = JSON.parse(body)
             if(json.status == "404"){
                 message.channel.reply(`I was unable to find the country ${args.slice(0).join(" ")}`)
             }else{              

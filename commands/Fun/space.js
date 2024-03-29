@@ -1,15 +1,16 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const {EmbedBuilder} =  require("discord.js")
-const got = require("got")
+const fetch = require("node-fetch")
 const fs = require('fs')
 module.exports={
     name:"space",
     description:"See some space",
     execute(client, message, args){
-        got(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API}`)
-        .then(response =>{
-            const space = JSON.parse(response.body)
+        fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API}`)
+        .then(res => res.text())
+        .then(body =>{
+            const space = JSON.parse(body)
             const string_space = JSON.stringify(space)
             const embed = new EmbedBuilder()
             .setTitle(`${space.title}`)

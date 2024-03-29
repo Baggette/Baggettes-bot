@@ -1,5 +1,5 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
-const got = require("got")
+const fetch = require("node-fetch")
 module.exports={
     name:"package",
     description:"Search for packages",
@@ -8,9 +8,10 @@ module.exports={
         message.channel.send("You have to specify a package name!")   
         return; 
         }
-        got(`https://spartacusdev.herokuapp.com/api/search/${encodeURIComponent(args.slice(0).join(" "))}`)
-        .then(response =>{
-            const json_stuff = JSON.parse(response.body)
+        fetch(`https://spartacusdev.herokuapp.com/api/search/${encodeURIComponent(args.slice(0).join(" "))}`)
+        .then(res => res.text())
+        .then(body =>{
+            const json_stuff = JSON.parse(body)
             //console.log(json_stuff.data.slice(5))
             const json_length = json_stuff.length
             if(!json_stuff.data[1]){

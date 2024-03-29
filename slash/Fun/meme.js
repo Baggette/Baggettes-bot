@@ -1,4 +1,4 @@
-const got = require('got')
+const fetch = require('node-fetch')
 const {EmbedBuilder, SlashCommandBuilder} = require('discord.js');
 module.exports ={
     data: new SlashCommandBuilder()
@@ -6,9 +6,10 @@ module.exports ={
     .setDescription('get a shitpost'),
     async execute(interaction){
         await interaction.deferReply()
-        got('https://www.reddit.com/r/dankmemes/random/.json')
-            .then(async response => {
-                const [list] = JSON.parse(response.body);
+        fetch('https://www.reddit.com/r/dankmemes/random/.json')
+            .then(res => res.text())
+            .then(async body => {
+                const [list] = JSON.parse(body);
                 const [post] = list.data.children;
                 const permalink = post.data.permalink;
                 const memeUrl = `https://reddit.com${permalink}`;

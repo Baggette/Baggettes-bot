@@ -1,4 +1,4 @@
-const got = require("got")
+const fetch = require("node-fetch")
 const {EmbedBuilder, SlashCommandBuilder} = require("discord.js")
 module.exports={
     data: new SlashCommandBuilder()
@@ -13,9 +13,10 @@ module.exports={
     async execute(interaction, client){
         const phrase = interaction.options.getString("word")
         await interaction.deferReply()
-        got(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(phrase)}`)
-        .then( async response => {
-            const json = JSON.parse(response.body)
+        fetch(`https://api.urbandictionary.com/v0/define?term=${encodeURIComponent(phrase)}`)
+        .then(res => res.text())
+        .then( async body => {
+            const json = JSON.parse(body)
             let clean_def = json.list[0].definition.replace(/[\[\]]/g, "")
             let clean_eg = json.list[0].example.replace(/[\[\]]/g, "")
             const embed = new EmbedBuilder()

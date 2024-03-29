@@ -1,14 +1,15 @@
 const {SlashCommandBuilder, EmbedBuilder} = require("discord.js")
-const got = require("got")
+const fetch = require("node-fetch")
 module.exports={
     data: new SlashCommandBuilder()
     .setName("cat")
     .setDescription("see a kitty"),
     async execute(interaction){
         await interaction.deferReply()
-        got("https://aws.random.cat/meow")
-        .then(async response =>{
-            const data = JSON.parse(response.body)
+        fetch("https://cataas.com/cat")
+        .then(res => res.text())
+        .then(async body =>{
+            const data = JSON.parse(body)
             const embed = new EmbedBuilder()
             .setTitle("Kitties")
             .setColor('#f5e942')

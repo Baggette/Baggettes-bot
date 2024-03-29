@@ -1,12 +1,13 @@
 const {EmbedBuilder} = require("discord.js")
-const got = require("got")
+const fetch = require("node-fetch")
 module.exports={
     name:"joke",
     desciption:"hahahahahahaha",
     execute(client, message, args){
-        got("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,racist,sexist,explicit")
-        .then(responce =>{
-            const joke = JSON.parse(responce.body)
+        fetch("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,racist,sexist,explicit")
+        .then(res => res.text())
+        .then(body =>{
+            const joke = JSON.parse(body)
             const embed = new EmbedBuilder()
             .setTitle(`A joke`)
             .setColor('#f5e942')

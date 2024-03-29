@@ -2,7 +2,7 @@
 const {Client, EmbedBuilder, Events, GatewayIntentBits, Collection } = require('discord.js');
 const dotenv = require('dotenv');
 dotenv.config();
-const got = require('got');
+const fetch = require('node-fetch');
 const Discord = require('discord.js');
 const fs = require('fs');
 const path = require('node:path');
@@ -76,9 +76,10 @@ client.on('ready', () => {
   console.log('Bot is online!')
   client.user.setPresence({ activities: [{ name: 'Listening to ghelp' }], status: 'active' });
   setInterval( () => {
-    got("https://api.chucknorris.io/jokes/random")
-    .then(response =>{
-      const norris = JSON.parse(response.body)
+    fetch("https://api.chucknorris.io/jokes/random")
+    .then(res => res.text())
+    .then(body =>{
+      const norris = JSON.parse(body)
       const embed = new EmbedBuilder()
         .setTitle(`Chuck Norris`)
         .setURL(`${norris.url}`)

@@ -1,12 +1,13 @@
 const {EmbedBuilder} = require("discord.js")
-const got = require("got")
+const fetch = require("node-fetch")
 module.exports={
     name:"norris",
     desciption:"chuck norris",
     execute(client, message, args){
-        got("https://api.chucknorris.io/jokes/random")
-        .then(responce =>{
-            const norris = JSON.parse(responce.body)
+        fetch("https://api.chucknorris.io/jokes/random")
+        .then(res => res.text())
+        .then(body =>{
+            const norris = JSON.parse(body)
             const embed = new EmbedBuilder()
             .setTitle(`Chuck Norris`)
             .setURL(`${norris.url}`)
