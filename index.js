@@ -74,6 +74,7 @@ for (const folder of commandFolders) {
 // Once Ready
 client.on('ready', () => {
   console.log('Bot is online!')
+  console.log(`${client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)}`);
   client.user.setPresence({ activities: [{ name: 'Listening to ghelp' }], status: 'active' });
   setInterval( () => {
     fetch("https://api.chucknorris.io/jokes/random")

@@ -1,8 +1,9 @@
-const {EmbedBuilder} = require('discord.js')
-const db = require('quick.db')
-const ms = require('parse-ms') 
-const { randomPassword, randomNumber, ipAddress } = require('tech-tip-cyber')
-const randomMail = require('tech-tip-cyber') 
+const {EmbedBuilder} = require('discord.js');
+const ms = require('parse-ms');
+const { QuickDB } = require('quick.db');
+const db = new QuickDB;
+const { randomPassword, randomNumber, ipAddress } = require('tech-tip-cyber');
+const { randomEmail } = require('tech-tip-cyber');
 module.exports ={
     name: 'hack',
     description: 'totaly real hack',
@@ -12,7 +13,7 @@ module.exports ={
         if (!mention) return message.reply(`Whom You Want To Hack?`) 
 
         const timeout = 120000 
-        const hacktime = db.fetch(`hacktime_${user.id}`)
+        const hacktime = await db.get(`hacktime_${user.id}`)
 
         if (hacktime !== null && timeout - (Date.now() - hacktime) > 0) { 
             const timeleft = ms(timeout - (Date.now() - hacktime))
@@ -27,11 +28,11 @@ Default CoolDown Is **2 Minutes**
             `)
             message.channel.send({embeds:[embed]})
         } else {
-            const disemail = randomMail({ 
+            const disemail = randomEmail({ 
                 domain: 'gmail.com' 
             })
 
-            const email = randomMail({ 
+            const email = randomEmail({ 
                 domain: 'gmail.com' 
             })
 
@@ -72,7 +73,7 @@ Default CoolDown Is **2 Minutes**
                     message.edit(`Hacked Gmail Account Of ${mention.user.username}\nEmail: ${email}\nPassword: ${password}`)
                 }, 26000)
                 setTimeout(function () {
-                    message.edit(`Getting IP Address For You To Hack PC...`)
+                    message.edit(`Getting IP Address To Hack PC...`)
                 }, 30000)
                 setTimeout(function () {
                     message.edit(`Found IP Address Of ${mention.user.username}\nIP: ${ip}`)
