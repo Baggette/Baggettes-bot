@@ -1,21 +1,32 @@
-const util = require('minecraft-server-util');
+const fetch = require('node-fetch');
 const {EmbedBuilder} = require('discord.js');
-const options = {
-    //timeout: 1000 * 5, // timeout in milliseconds
-    enableSRV: true // SRV record lookup
-};
 module.exports ={
     name: 'mcping',
     description: 'Ping a minecraft server',
-    execute(client, message, args){
-        const server_ip = args[0]
-        const server_port_string = args[1]
-        const server_port = parseInt(server_port_string)
+    async execute(client, message, args){
+
+    function mcping(server_ip, server_port, options){
+        if(options == "java"){
+        fetch(`https://api.mcstatus.io/v2/status/java/${server_ip}:${server_port}`)
+        .then(res => res.text())
+        .then(body =>{
+            const data = JSON.parse(body)
+            console.log(data);
+        })
+        } else{
+
+        }   
+    }
         if(!args[0]){
             message.channel.send("Please specify the server ip.")
         }else if(!args[1]){
-            message.channel.send("Please specify the server port.")
-        }else if(args[0] && args[1] && !args[2]){
+            if(args[0] && !args[1]){
+            const msg = await message.channel.send("Port will default to 25565 as no port was provided")
+            await new Promise(r => setTimeout(r, 1000));
+            args[1] = "25565";
+            if (!args[2]) {msg.edit("No server type was provided, defaulting to java"); mcping(args[0], args[1], args[2] ?? "java")}
+            }
+        } /*else if(args[0] && args[1] && !args[2]){
             util.status(server_ip, server_port, options)
     .then((result) => {
         const embed = new EmbedBuilder()
@@ -74,6 +85,6 @@ module.exports ={
     message.channel.send({embeds: [embed]})// send the embed
     
     })
-    }
+    }*/
     }
 }

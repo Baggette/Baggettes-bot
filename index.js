@@ -6,10 +6,11 @@ const fetch = require('node-fetch');
 const Discord = require('discord.js');
 const fs = require('fs');
 const path = require('node:path');
-const { DisTube } = require('distube')
 const { QuickDB } = require('quick.db');
 const db = new QuickDB();
-const { YtDlpPlugin } = require('@distube/yt-dlp')
+const schedule = require('node-schedule');
+const { secureHeapUsed } = require('crypto');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 // Instantiate Client
 const client = new Client({
@@ -21,17 +22,6 @@ const client = new Client({
         GatewayIntentBits.GuildVoiceStates,
     ]
 });
-
-// Instantiate Music Client
-client.distube = new DisTube(client, {
-  leaveOnStop: false,
-  emitNewSongOnly: true,
-  emitAddSongWhenCreatingQueue: false,
-  emitAddListWhenCreatingQueue: false,
-  plugins: [
-    new YtDlpPlugin()
-  ]
-})
 
 // Slash Commands Manager
 client.commands = new Collection();
@@ -72,11 +62,33 @@ for (const folder of commandFolders) {
 }
 
 // Once Ready
-client.on('ready', () => {
+client.on('ready', async () => {
   console.log('Bot is online!')
   console.log(`${client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)}`);
   client.user.setPresence({ activities: [{ name: 'Listening to ghelp' }], status: 'active' });
-  setInterval( () => {
+
+  /*const genAI = new GoogleGenerativeAI(process.env.PALM_API);
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+  async function checkNorris(norris){
+    console.log(norris.value)
+    const prompt = `I am going to provide you some input, it is your job to make sure it does not contain any racist or sexist refrerences. \n\n${norris.value}, reply only with yes if it is appropriate or no if it is not. Do NOT REPLY WITH ANYTHING ELSE.`
+    const result = await model.generateContent(prompt);
+    console.log(result.response.text());
+  }
+
+  function getNorris(){
+    fetch("https://api.chucknorris.io/jokes/random")
+    .then(res => res.text())
+    .then(body =>{
+      const norris = JSON.parse(body)
+      checkNorris(norris);
+    })
+    .catch((err) =>{
+    })
+  }
+  getNorris();*/
+  const job = schedule.scheduleJob('45 9 * * *', function(){
     fetch("https://api.chucknorris.io/jokes/random")
     .then(res => res.text())
     .then(body =>{
@@ -91,10 +103,12 @@ client.on('ready', () => {
     })
     .catch((err) =>{
       channel.send(`An error occurred: ${err}`)
-    })}, 86400000)
-    console.log(client.guilds.cache.map(guild => guild.name).reduce((previous,current) => {
+    })
+  });
+
+    /*console.log(client.guilds.cache.map(guild => guild.name).reduce((previous,current) => {
                 return previous + "\n" + current
-            }, "").substring(2))
+            }, "").substring(2))*/
 });
 
 // On Slash Command
@@ -130,61 +144,3 @@ client.on('messageCreate', async (message) => {
   }
   client.commands.get(command).execute(client, message, args)
 });
-
-// Music Bot Settings
-const status = queue => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.names.join(', ') || 'Off'}\` | Loop: \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'}\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``
-
-client.distube
-
-  .on('playSong', (queue, song) =>{
-    const playsong_embed = new EmbedBuilder()
-      .setColor('#f5e942')
-      .setDescription(`Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}\n${status(queue)}`)
-      .setTimestamp()
-    queue.textChannel.send({embeds:[playsong_embed]})
-  })
-  .on('addSong', (queue, song) =>{
-    const addsong_embed = new EmbedBuilder()
-      .setColor('#f5e942')
-      .setDescription(`Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`)
-      .setTimestamp()
-    queue.textChannel.send({embeds:[addsong_embed]})
-  })
-  .on('addList', (queue, playlist) =>{
-    const addlist_embed = new EmbedBuilder()
-      .setColor('#f5e942')
-      .setDescription(`Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n${status(queue)}`)
-      .setTimestamp()
-    queue.textChannel.send({embeds:[addlist_embed]})
-  })
-  .on('error', (channel, e) => {
-    const error_embed = new EmbedBuilder()
-      .setColor('#f5e942')
-      .setDescription(`An error encountered: ${e.toString().slice(0, 1974)}`)
-      .setTimestamp()
-    if (channel) channel.send({embeds:[error_embed]})
-    else console.error(e)
-  })
-  .on('empty', channel =>{
-    const empty_embed = new EmbedBuilder()
-      .setColor('#f5e942')
-      .setDescription('Voice channel is empty! Leaving the channel...')
-      .setTimestamp() 
-    channel.send({embeds:[empty_embed]})
-  })
-  .on('searchNoResult', (message, query) =>{
-    const no_result_embed = new EmbedBuilder()
-      .setColor('#f5e942')
-      .setDescription(`No result found for \`${query}\`!`)
-      .setTimestamp()
-    message.channel.send({embeds:[no_result_embed]})
-  })
-  .on('finish', queue => {
-    const finished_embed = new EmbedBuilder()
-      .setColor('#f5e942')
-      .setDescription("Finished!")
-      .setTimestamp()
-    queue.textChannel.send({embeds:[finished_embed]})
-  })
-
-// Login with the token  

@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js")
-const util = require('minecraft-server-util');
 const wait = require('node:timers/promises').setTimeout;
 const options = {
     //timeout: 1000 * 5, // timeout in milliseconds
